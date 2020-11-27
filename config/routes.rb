@@ -7,6 +7,7 @@ Rails.application.routes.draw do
 
   get "/signup", to: "users#new"
 
+  resources :users
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing
   # get  'static_pages/help' の場合 to:'static_pages#help'
   # 個別のurl_url  という urlヘルパーがつかえる
