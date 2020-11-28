@@ -7,4 +7,12 @@ class User < ApplicationRecord
 
     has_secure_password
     validates :password, presence: true, length: { minimum: 6 }
+    #User.new　と同じ
+    #クラスメソッド(self.メソッド名)を定義しているので,使うときは User.メソッド名
+    # 渡された文字列のハッシュ値を返す
+    def User.digest(string)
+      cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST :
+                                                    BCrypt::Engine.cost
+      BCrypt::Password.create(string, cost: cost)
+    end
 end

@@ -16,6 +16,7 @@ class UsersController < ApplicationController
     #マスアサインメントとは,フォームから送られてきたパラメーターをひとつにまとめて,一度に保存できるRailsの機能です。
     #例.@user = User.new(params[:user])@user = User.new(params[:user])
     if @user.save
+      log_in @user #session_helperのメソッド
       flash[:success] = "Welcome to the Sample App!"
       redirect_to @user
       #=redirect_to user_url(@user) Railsが推察

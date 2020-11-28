@@ -1,1 +1,10 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+#user = users(:michael)で呼び出せる
+
+#UserテーブルのテストDB用のサンプルデータが含まれているfixtures
+michael:
+  name: Michael Example
+  email: michael@example.com
+  password_digest: <%= User.digest('password') %>
+#fixtureではERbを利用できる

@@ -14,8 +14,7 @@ class UsersSignupTest < ActionDispatch::IntegrationTest
       password:              "foo",
       password_confirmation: "bar" } }
     end
-    assert_template 'users/new'
-    #render "new" のためtemplate
+    assert_template 'users/new' #正しい見た目になっているのか？
   end
 
   test "valid signup information" do
@@ -29,6 +28,7 @@ class UsersSignupTest < ActionDispatch::IntegrationTest
     end
     follow_redirect! #指定されたリダイレクト先に移動するメソッド
     assert_template 'users/show'
+    assert is_logged_in?
   end
 
 end
