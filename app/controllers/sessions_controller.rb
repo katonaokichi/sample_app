@@ -6,6 +6,7 @@ class SessionsController < ApplicationController
     user = User.find_by(email: params[:session][:email].downcase)
     if user && user.authenticate(params[:session][:password])
       log_in user #メソッド呼び出しの時引数の()省略可能
+      params[:session][:remember_me] == '1' ? remember(user) : forget(user)
       redirect_to user #U完全なRLが必要
       #rails が　user_url(user)に変換
     else
@@ -16,7 +17,7 @@ class SessionsController < ApplicationController
   end
 
   def destroy
-    log_out
+    log_out if logged_in? #curent_userがnilにならないように
     redirect_to root_url
   end
 end
