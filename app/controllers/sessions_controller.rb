@@ -7,7 +7,8 @@ class SessionsController < ApplicationController
     if user && user.authenticate(params[:session][:password])
       log_in user #メソッド呼び出しの時引数の()省略可能
       params[:session][:remember_me] == '1' ? remember(user) : forget(user)
-      redirect_to user #U完全なRLが必要
+      redirect_back_or user
+      #フレンドリーフォワーディングするため
       #rails が　user_url(user)に変換
     else
       flash.now[:danger] = 'Invalid email/password combination'

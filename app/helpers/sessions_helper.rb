@@ -28,6 +28,12 @@ module SessionsHelper
     end
   end
 
+  # 渡されたユーザーがカレントユーザーであればtrueを返す
+  def current_user?(user)
+    user && user == current_user 
+    #user == current_userだと存在しないuserでログインしてないときtrueとなってしまう
+  end
+
   def logged_in?
     !current_user.nil?
   end
@@ -43,5 +49,18 @@ module SessionsHelper
     forget(current_user) #logoutにまとめる
     session.delete(:user_id) #sessionというハッシュのuser_idのキーを削除
     @current_user = nil
+  end
+
+  # 記憶したURL（もしくはデフォルト値）にリダイレクト
+  def redirect_back_or(default)
+    redirect_to(session[:forwarding_url] || default)
+    session.delete(:forwarding_url)
+    #ここで消さないとログインしない状態で保護されたページに行かない限りログインするたびに記憶したページに行く
+  end
+
+  # アクセスしようとしたURLを覚えておく
+  def store_location
+    session[:forwarding_url] = request.original_url if request.get?
+    #if request.get?がないとpost,patceはredirectできないためエラーがおきる
   end
 end
