@@ -27,10 +27,11 @@ class UsersController < ApplicationController
     # params[:user]={id:1,name:"kato"..}とハッシュインハッシュ
     #例.@user = User.new(params[:user])
     if @user.save
-      log_in @user #session_helperのメソッド
-      flash[:success] = "Welcome to the Sample App!"
-      redirect_to @user
-      #=redirect_to user_url(@user) Railsが推察
+      @user.send_activation_email
+      #UserMailerのaccount_activationメソッドを使って作った
+      #mailオブジェトに対してdeliver_nowメソッドを使って送信する
+      flash[:info] = "Please check your email to activate your account."
+      redirect_to root_url
     else
       render 'new'
     end

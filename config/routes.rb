@@ -10,6 +10,10 @@ Rails.application.routes.draw do
   get    '/login',   to: 'sessions#new'
   post   '/login',   to: 'sessions#create'
   delete '/logout',  to: 'sessions#destroy'
+
+  resources :account_activations, only: [:edit]
+  #edit だとidをいれこむことができるから、showでもいい
+  #/users/id/edit	idはそのユーザを特定できるものなら何でもいい
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing
   # get  'static_pages/help' の場合 to:'static_pages#help'
   # 個別のurl_url  という urlヘルパーがつかえる
