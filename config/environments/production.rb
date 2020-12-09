@@ -39,7 +39,8 @@ Rails.application.configure do
 
   #config.active_storage.service = :local
     # アップロードされたファイルをAWSに保存する
-    config.active_storage.service = :amazon #storage.ymmlの
+  config.active_storage.service = :amazon 
+    #storage.ymmlの
     #本番環境のストレージをlocalからamazonに変更
 
 
