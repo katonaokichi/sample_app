@@ -17,6 +17,7 @@ Rails.application.routes.draw do
 
   resources :password_resets,     only: [:new, :create, :edit, :update]
 
+  resources :microposts,          only: [:create, :destroy]
   #edit だとidをいれこむことができるから、showでもいい
   #/users/id/edit	idはそのユーザを特定できるものなら何でもいい
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing

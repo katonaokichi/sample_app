@@ -1,4 +1,5 @@
 class User < ApplicationRecord
+    has_many :microposts, dependent: :destroy
     #クラスに属性を追加、マグレーションファイルを編集していない為,仮想的な属性
     #has_secure_passwordメソッドでpassword属性は自動的に作られている
     attr_accessor :remember_token, :activation_token, :reset_token
@@ -82,6 +83,13 @@ class User < ApplicationRecord
   #パスワード再設定メールの送信時刻が現在時刻より2時間以上前の場合  
   end
   
+   # 試作feedの定義
+  # 完全な実装は次章の「ユーザーをフォローする」を参照
+  def feed
+    Micropost.where("user_id = ?", self.id)
+    #?でセキュリティの為
+  end
+
   private #Userモデル内でしか使わない
 
     # メールアドレスをすべて小文字にする

@@ -1,0 +1,11 @@
+<% if @feed_items.any? %>
+  <ol class="microposts">
+    <%= render @feed_items %>
+<%# Micropostの集合なので勝手にMicropostのパーシャルを呼び出す渡されたリソースのディレクトリ内から探しにいく %>    
+  </ol>
+   <%= will_paginate @feed_items,
+   params: { controller: :static_pages, action: :home } %>
+   <%# 2ボタンのデフォルトは"そのアクションのURL?page=2"となるのでcreateが失敗した場合 %>
+   <%# エラーを表示する為renderするためURLが"createアクションのURL?page=2"となり無効となる %>
+   <%# 2ボタンにcontrollerパラメータとaction パラメータを渡す %>
+<% end %>

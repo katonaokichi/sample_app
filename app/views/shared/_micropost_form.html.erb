@@ -1,0 +1,11 @@
+<%= form_with(model: @micropost, local: true) do |f| %>
+<%# modelにインスタンス変数を渡すことにより空か入っているのかで送信先URLを自動で設定してくれる %>
+  <%= render 'shared/error_messages', object: f.object %>
+  <%# renderの最後に ローカル変数名: でrender先に渡すことができる %>
+  <%# f.objectでその時参照したモデル(@micropost)を呼び出せる %>
+  <div class="field">
+    <%= f.text_area :content, placeholder: "Compose new micropost..." %>
+    <%# placeholder デフォルト文 %>
+  </div>
+  <%= f.submit "Post", class: "btn btn-primary" %>
+<% end %>

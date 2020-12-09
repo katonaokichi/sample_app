@@ -29,3 +29,11 @@ User.create!(name:  name,
       activated: true,
       activated_at: Time.zone.now)
 end
+
+# ユーザーの一部を対象にマイクロポストを生成する
+users = User.order(:created_at).take(6) #古い人から六人の集団
+50.times do
+  content = Faker::Lorem.sentence(word_count: 5)
+  #Faker gemのLorem.sentenceメソッド ランダム５単語
+  users.each { |user| user.microposts.create!(content: content) }
+end

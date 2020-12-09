@@ -1,11 +1,11 @@
 <!--複数のビューで使われるパーシャルは専用のディレクトリshared-->
-<% if @user.errors.any? %>
+<% if object.errors.any? %>
   <div id="error_explanation"><%# error_explanationはCSSヘルパー的な %>
     <div class="alert alert-danger"><%# (数,英単語)=>数+複数形 %>
-      The form contains <%= pluralize(@user.errors.count, "error") %>.
+      The form contains <%= pluralize(object.errors.count, "error") %>.
     </div>
     <ul>
-    <% @user.errors.full_messages.each do |msg| %>
+    <% object.errors.full_messages.each do |msg| %>
       <li><%= msg %></li>
     <% end %>
     </ul>

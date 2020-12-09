@@ -4,9 +4,10 @@
 <%= will_paginate %> <%# ページのリンク %>
 
 <ul class="users">
-  <% @users.each do |user| %>
-    <%= render @users %>
-  <% end %>
+  <%# @users.each do |user|%>
+    <%# render user %>
+  <%# end %>
+  <%= render @users %>
     <%# render user 各userオブジェクトが属しているクラスであるUserなので自動的に_user.html.erbというパーシャルを探す %>
     <%# render @usersを実行すると、自動的に_user.html.erbパーシャルを参照し、パーチャルで単数系userを与えた場合各ユーザーをコレクションとして表示する %>
     <%#パーシャルが同じディレクトリにある時はrender '{ファイル名}'%>
