@@ -4,6 +4,9 @@ before_action :correct_user,   only: :destroy
 
 def create
   @micropost = current_user.microposts.build(micropost_params)
+  @micropost.image.attach(params[:micropost][:image])
+#has_one_attached :image より.imageが可能に
+#それにattachメソッドで画像を添付
   if @micropost.save
     flash[:success] = "Micropost created!"
     redirect_to root_url
@@ -23,7 +26,7 @@ end
 
   private
     def micropost_params
-      params.require(:micropost).permit(:content)
+      params.require(:micropost).permit(:content, :image)
     end
 
     #URLからきたとき、投稿者か？(認可) & その投稿はデータベース上にあるのか？
